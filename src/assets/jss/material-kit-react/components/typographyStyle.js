@@ -1,10 +1,10 @@
 import {
-  defaultFont,
-  primaryColor,
-  infoColor,
-  successColor,
-  warningColor,
-  dangerColor
+    dangerColor,
+    defaultFont,
+    infoColor,
+    primaryColor,
+    successColor,
+    warningColor
 } from "assets/jss/material-kit-react.js";
 
 const typographyStyle = {

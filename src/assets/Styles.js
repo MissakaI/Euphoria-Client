@@ -1,5 +1,5 @@
-import { makeStyles } from '@material-ui/core/styles';
-import { container, primaryColor } from "./jss/material-kit-react";
+import {makeStyles} from '@material-ui/core/styles';
+import {container, primaryColor} from "./jss/material-kit-react";
 
 export const useStyles = makeStyles(theme => ({
     container: {
@@ -98,17 +98,5 @@ export const signInStyles = makeStyles(theme => ({
     },
     submit: {
       margin: theme.spacing(3, 0, 2),
-    },
-  }));
-
-  export const CreatePostStyles = makeStyles(theme => ({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    textField: {
-      marginLeft: theme.spacing(1),
-      marginRight: theme.spacing(1),
-      width: 200,
     },
   }));

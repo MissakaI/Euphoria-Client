@@ -1,10 +1,10 @@
 import {
-  roseColor,
-  primaryColor,
-  infoColor,
-  successColor,
-  warningColor,
-  dangerColor
+    dangerColor,
+    infoColor,
+    primaryColor,
+    roseColor,
+    successColor,
+    warningColor
 } from "assets/jss/material-kit-react.js";
 
 const navPillsStyle = theme => ({

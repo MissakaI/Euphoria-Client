@@ -11,11 +11,14 @@ export const signInSuccess = () => {
 export const signIn = (state) => dispatch => {
     console.log(state);
 
-    // return axios.post('http://localhost:8080/api/counselor/sign-in', JSON.stringify(state), {
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     }
-    // }).then((response) => console.log(response));
+    return axios.post('http://localhost:8080/api/counselor/sign-in', JSON.stringify(state), {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }).then((response) => {
+        console.log(response);
+        dispatch(signInSuccess());
+    });
 
     // let url = 'http://localhost:8080/api/counselor/sign-in';
     // const headers = {
@@ -30,7 +33,7 @@ export const signIn = (state) => dispatch => {
     //     console.log(err);
     // });
 
-    dispatch(signInSuccess());
+
 
 };
 

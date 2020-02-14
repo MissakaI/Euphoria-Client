@@ -1,21 +1,25 @@
 import React, {Component} from 'react';
 import "./CounselorSignIn.scss";
 import {Grid, Card, CardContent, TextField, Typography, Button} from "@material-ui/core";
+import CloudUploadIcon from "@material-ui/icons/CloudUploadOutlined";
 import logo from "../../assets/eu-logo.png";
 import {connect} from 'react-redux';
 import * as actions from "../../actions/index";
-
 
 class CounselorSignIn extends Component {
 
     constructor(props) {
         super(props);
+        this.setState({
+            isSignUp:props.isSignUp
+        })
     };
 
     state = {
         username: null,
         password: null,
-        signIn: null
+        signIn: null,
+        isSignUp: false
     };
 
     signIn = () => {
@@ -27,6 +31,12 @@ class CounselorSignIn extends Component {
         this.props.signIn(signInCredentials);
     };
 
+    changeMode = () => {
+        this.setState({
+            isSignUp:!this.state.isSignUp
+        });
+    }
+
     handleChange = e => {
         this.setState({
             [e.target.id]: e.target.value
@@ -34,18 +44,19 @@ class CounselorSignIn extends Component {
     };
 
     componentDidUpdate() {
-        if(this.props.signedIn){
+        if (this.props.signedIn) {
             this.props.history.push("/counselor/appointments");
         }
     };
 
 
     render() {
-
-        return (
-            <>
-                <Grid container id="rootGrid">
-                    <Grid xs={12} sm={8} md={6} lg={4}>
+        let card
+        if (!this.state.isSignUp){
+            card =
+                <>
+                    {/* Begin:Sign-In Card */}
+                    <Grid id={"CrdSgnIn"} item xs={12} sm={8} md={6} lg={4}>
                         <Card className={'transparent'}>
                             <CardContent>
                                 <Grid container id={'logoGrid'} className={"imgRaised"}>
@@ -91,19 +102,133 @@ class CounselorSignIn extends Component {
                                             type={"submit"}
                                             onClick={() => this.signIn()}
                                         >
-                                            Sign
-                                            In
+                                            Sign In
                                         </Button>
                                     </Grid>
 
                                     <Grid item xs={12} className={'horizontalCenter'}>
-                                        <Button className={'btn-small'}>Not a member? Join as a counselor
+                                        <Button className={'btn-small'} onClick={() => this.changeMode()}>Not a member? Join as a counselor
                                             today.</Button>
+
                                     </Grid>
                                 </Grid>
                             </CardContent>
                         </Card>
                     </Grid>
+                    {/* End:Sign-In Card */}
+                </>
+        }else{
+            card =
+                <>
+                    {/* Begin:Sign-Up Card */}
+                    <Grid id={"CrdSgnUp"} item xs={12} sm={8} md={6} lg={4}>
+                        <Card className={'transparent'}>
+                            <CardContent>
+                                <Grid container id={'logoGrid'} className={"imgRaised"}>
+                                    <Grid item xs={6}>
+                                        <img src={logo}/>
+                                    </Grid>
+
+                                    <Grid item xs={6} className={'brandText'}>
+                                        <Typography>Euphoria</Typography>
+                                    </Grid>
+
+                                </Grid>
+                                <hr/>
+                                <Grid container id={'fieldGrid'} spacing={2}>
+                                    <Grid item xs={12}>
+                                        <TextField id={'name'}
+                                                   onChange={e => this.handleChange(e)}
+                                                   className={'txtFld-small'}
+                                                   variant={'outlined'}
+                                                   label={'Name'}
+                                                   fullWidth
+                                        />
+                                    </Grid>
+
+                                    <Grid item xs={6}>
+                                        <TextField
+                                            id={'speciality'}
+                                            onChange={e => this.handleChange(e)}
+                                            className={'txtFld-small'}
+                                            variant={'outlined'}
+                                            label={'Specialized Field'}
+                                            fullWidth/>
+                                    </Grid>
+
+                                    <Grid item xs={6}>
+                                        <TextField
+                                            id={'hospital'}
+                                            onChange={e => this.handleChange(e)}
+                                            className={'txtFld-small'}
+                                            variant={'outlined'}
+                                            label={'Hospital/Work'}
+                                            fullWidth/>
+                                    </Grid>
+
+                                    <Grid item xs={6}>
+                                        <TextField
+                                            id={'city'}
+                                            onChange={e => this.handleChange(e)}
+                                            className={'txtFld-small'}
+                                            variant={'outlined'}
+                                            label={'City'}
+                                            fullWidth/>
+                                    </Grid>
+
+                                    <Grid item xs={6}>
+                                        <input
+                                            accept="image/*"
+                                            id="btn-photo"
+                                            type="file"
+                                        />
+                                        <label htmlFor="btn-photo">
+                                            <Button
+                                                variant="outlined"
+                                                // component="span"
+                                                fullWidth={true}
+                                                size={"large"}
+                                                startIcon={<CloudUploadIcon />}
+                                            >
+                                                Profile Photo
+                                            </Button>
+                                        </label>
+                                    </Grid>
+
+                                    <Grid item xs={12} sm={10} id={'buttonGrid'}
+                                          className={'verticalCenter spaceBetween'}>
+                                        <Button
+                                            onClick={() => this.changeMode()}
+                                        >
+                                            Already a member. Sign In instead?
+                                        </Button>
+                                        <Button
+                                            variant={"outlined"}
+                                            color={"primary"}
+                                            id={'signUpBtn'}
+                                            type={"submit"}
+                                            onClick={() => this.signIn()}
+                                        >
+                                            Sign Up
+                                        </Button>
+                                    </Grid>
+
+                                    <Grid item xs={12} className={'horizontalCenter'}>
+                                        {/*<Button className={'btn-small'}>Not a member? Join as a counselor*/}
+                                        {/*    today.</Button>*/}
+
+                                    </Grid>
+                                </Grid>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    {/* End:Sign-In Card */}
+                </>
+        }
+        return (
+            <>
+                <Grid container id="rootGrid">
+                    {card}
                 </Grid>
             </>
         );

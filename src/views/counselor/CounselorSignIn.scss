@@ -1,87 +1,120 @@
 
-
-#rootGrid{
+#rootGrid {
   background-image: url("../../assets/img/wallpapers/wall1.jpg");
   background-size: cover;
   height: 100vh;
   align-items: center;
   padding: 2em;
+
+  .transparent {
+    background-color: rgba(white, 0.5);
+  }
 }
 
-hr{
+hr {
   height: 1em;
 }
 
-#logoGrid{
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+#CrdSgnIn {
+  #logoGrid {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 
-  img{
-    height: 30vh;
-  }
+    img {
+      height: 30vh;
+    }
 
-  .brandText{
-    p{
-      font-size: 2em;
-      text-shadow: 0px 3px 3px #282c34;
-      color: royalblue;
-      font: 80px 'Roboto Thin';
+    .brandText {
+      p {
+        //font-size: 2em;
+        text-shadow: 0px 3px 3px #282c34;
+        color: royalblue;
+        font: 80px 'Roboto Thin';
+      }
     }
   }
+
+
+  #fieldGrid {
+    justify-content: center;
+    align-items: center;
+  }
+
+  #fypTxt {
+    float: left;
+  }
+
+  #signInBtn {
+    float: right;
+    align-self: flex-end;
+  }
 }
 
-
-#fieldGrid{
-  justify-content: center;
-  align-items: center;
-}
-
-.verticalCenter{
+.verticalCenter {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
 
-.horizontalCenter{
+.horizontalCenter {
   display: grid;
   justify-content: center;
 }
 
-.spaceBetween{
+.spaceBetween {
   justify-content: space-between;
 }
 
-#fypTxt{
-  float: left;
-}
 
-#signInBtn{
-  float: right;
-  align-self: flex-end;
-}
+.txtFld-small {
 
-.transparent{
-  background-color: rgba(white, 0.5);
-}
-
-.txtFld-small{
-
-  input{
+  input {
     padding-top: 0.8em;
     padding-bottom: 0.8em;
   }
 
-  label{
-    transform: translate(0.8em,0.9em) scale(1);
+  label {
+    transform: translate(0.8em, 0.9em) scale(1);
   }
 
 }
 
-.btn-small{
+.btn-small {
   .MuiButton-label {
     font-size: 0.8em;
     text-transform: none;
     font-weight: normal;
+  }
+}
+
+
+#CrdSgnUp {
+  #logoGrid {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    img {
+      height: 20vh;
+    }
+
+    .brandText {
+      p {
+        text-shadow: 0px 3px 3px #282c34;
+        color: royalblue;
+        font: 40px 'Roboto Thin';
+      }
+    }
+  }
+
+  #btn-photo{
+    display: none;
+    line-height: 2em;
+  }
+
+  #signUpBtn {
+    float: right;
+    align-self: flex-end;
   }
 }

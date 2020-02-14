@@ -1,25 +1,26 @@
-import React, { Component } from 'react'
-import {Row,Col,Card,Button,ListGroupItem,Form} from 'react-bootstrap';
+import React, {Component} from 'react'
+import {Button, Card, Col} from 'react-bootstrap';
 import axios from 'axios';
-import CounselorRequestModal from '../../components/user/CounselorRequestModal';
-import UserProfile from '../../assets/UserProfile';
 
 export default class CounselorBody extends Component {
 
-    makeRequest=(msg)=>{
-        const user_counselor={
-            "user_id":UserProfile.getId(),
-            "counselor_id":this.props.doc.counselor_id
+    handleClick=(e)=>{
+        e.preventDefault();
+        const doctor=this.props.doc;
+        const patient={
+            "user_id":1,
+            "user_name":"Daniel Carter"
         }
-        const request_description=msg;
-        const counselor_request_details={...user_counselor,request_description};
-        console.log(counselor_request_details)
-        axios.post('http://localhost:8080/api/user/requestcounselor',JSON.stringify(counselor_request_details),{headers: {
+        const details={...doctor,...patient};
+        console.log(details)
+        axios.post('http://localhost:8080/api/user/counselorrequest',JSON.stringify(details),{headers: {
             'Content-Type': 'application/json',
         }})
         .then((response)=>{
             console.log(response);
             alert("Request Successful");
+            
+        
         })
 
     }
@@ -36,12 +37,11 @@ export default class CounselorBody extends Component {
                        
                         }} />
                         <Card.Body>
-                            <Card.Title>{this.props.doc.counselor_name}</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">{this.props.doc.specialty}</Card.Subtitle>
-                            <Card.Text>{this.props.doc.description}</Card.Text>
-                            
-                            <CounselorRequestModal doc={this.props.doc} makerequest={this.makeRequest}></CounselorRequestModal>
-                            {/* <Button variant="primary" onClick={this.handleClick}>Request</Button> */}
+                            <Card.Title>{this.props.doc.doctor_name}</Card.Title>
+                            <Card.Subtitle>{this.props.doc.specialty}</Card.Subtitle>
+                            <Card.Text>
+                            </Card.Text>
+                            <Button variant="primary" onClick={this.handleClick}>Request</Button>
                         </Card.Body>
                     </Card>
                 </Col>

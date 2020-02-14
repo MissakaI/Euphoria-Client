@@ -1,5 +1,3 @@
-import {SIGN_IN} from './types';
-
 const axios = require('axios');
 
 export const signIn = (state) =>dispatch=>{

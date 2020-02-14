@@ -1,4 +1,4 @@
-import React,{useState,useEffect,Component} from 'react';
+import React, {Component} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -8,26 +8,16 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 
 import Container from '@material-ui/core/Container';
-
-import {connect} from 'react-redux';
-import { useSelector, useDispatch } from "react-redux";
-import {signIn} from '../actions/signInActions';
-import {signInStyles} from '../assets/Styles';
-
-import { Redirect } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 
 import logo from '../assets/eu-logo.png';
 import axios from 'axios';
 
 import UserProfile from '../assets/UserProfile';
-import Counselors from '../views/user/Counselors'
 
 function Copyright() {
   return (
@@ -88,20 +78,18 @@ class SignIn extends Component{
   handleClick=(e)=>{
     e.preventDefault();
     console.log("redirect");
-    console.log(this.state)
+    
     axios.post('http://localhost:8080/api/user/signin',JSON.stringify(this.state),{headers: {
         'Content-Type': 'application/json',
     }})
     .then((response)=>{
       if(response.data){
-        console.log("signed in");
-        const user=response.data[0]
-        UserProfile.setEmail(user.email);
-        UserProfile.setName(user.firstname);
-        UserProfile.setId(user.uid)
+        UserProfile.setEmail(this.state.email);
+        UserProfile.setName(this.state.name);
         this.props.history.push('/user/counselors');
       }else{
-        alert("wrong username or password");
+        alert("Invalid combination of username and password");
+        this.setState({"email":'',"password":''});
       }
     }) 
     
@@ -166,7 +154,7 @@ class SignIn extends Component{
                       </Link>
                     </Grid>
                     <Grid item>
-                      <Link href="/user/signup" variant="body2">
+                      <Link href="#" variant="body2">
                         {"Don't have an account? Sign Up"}
                       </Link>
                     </Grid>

@@ -1,15 +1,14 @@
 import React from 'react';
-import {Jumbotron as Jumbo,Container} from 'react-bootstrap';
+import {Container, Jumbotron as Jumbo} from 'react-bootstrap';
 import styled from 'styled-components';
 import welcomeImage from '../../assets/img/welcome.jpg';
 
 const Styles=styled.div`
     .jumbotron {
-        background : url(${welcomeImage})no-repeat center center;
+        background : url(${welcomeImage})no-repeat fixed bottom;
         background-size:cover;
         color:#ccc;
-        width:100%;
-        height: 300px
+        height:200px;
         position:relative;
         z-index:-2;
     }
@@ -23,23 +22,6 @@ const Styles=styled.div`
         right:0;
         z-index:-1;
     }
-    // .d {
-    //     background : url(${welcomeImage})no-repeat center center;
-    //     position: fixed;
-    //     width: 100%;
-    //     height: 350px; /*same height as jumbotron */
-    //     top:0;
-    //     left:0;
-    //     z-index: -1;
-        
-    // }
-    // .dw{
-    //     margin-bottom: 0px;
-    //     height: 350px;
-    //     color: white;
-    //     text-shadow: black 0.3em 0.3em 0.3em;
-    //     background:transparent;
-    // }
 `;
 export const Jumbotron = () =>{
     return(
@@ -47,7 +29,7 @@ export const Jumbotron = () =>{
             <Jumbo fluid className="jumbo">
                 <div className="overlay"></div>
                 <Container>
-                    <h1 style={{textAlign:'center',marginTop:'100px'}}>The only journey is the journey within!</h1>
+                    <h1>The only journey is the journey within!</h1>
                 </Container>
             </Jumbo>
         </Styles>

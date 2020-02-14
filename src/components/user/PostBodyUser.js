@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PostComponentUser from './PostComponentUser';
+
 export default class PostBodyUser extends Component {
   render() {
     return (

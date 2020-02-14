@@ -1,6 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import {MDBContainer, MDBRow, MDBCol, MDBNavbar, MDBNavbarBrand} from "mdbreact";
+import {MDBNavbar, MDBNavbarBrand} from "mdbreact";
 
 class Template{
     return(){

@@ -1,4 +1,0 @@
-User====
-
-if either one field is blank in the user info table.display a message during every session implying 
-the importance of a formal account.

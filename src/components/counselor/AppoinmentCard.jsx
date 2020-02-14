@@ -4,18 +4,12 @@ import Typography from '@material-ui/core/Typography';
 
 // import { connect } from 'react-redux';
 
-<<<<<<< HEAD:src/components/forum/AppoinmentCard.jsx
-=======
 class AppoinmentCard extends Component {
->>>>>>> aa938640d739e6ba73ade98719c7dc62d1671506:src/components/counselor/AppoinmentCard.jsx
 
     handleClick=()=>{
         this.setState({'status':'Approved'})
     }
-<<<<<<< HEAD:src/components/forum/AppoinmentCard.jsx
-=======
 
->>>>>>> aa938640d739e6ba73ade98719c7dc62d1671506:src/components/counselor/AppoinmentCard.jsx
     render() {
         return (
             <Grid item xs={4}>
@@ -55,12 +49,8 @@ class AppoinmentCard extends Component {
                     </CardContent>
 
                     <CardActions style={{float:"right"}}>
-<<<<<<< HEAD:src/components/forum/AppoinmentCard.jsx
-                        <Button onClick={this.handleClick}>Approve</Button>
-=======
                         {/*<Button onClick={this.handleClick}>Approve</Button>*/}
                         <Button>Approve</Button>
->>>>>>> aa938640d739e6ba73ade98719c7dc62d1671506:src/components/counselor/AppoinmentCard.jsx
                         <Button>Reject</Button>
                     </CardActions>
                 </Card>
