@@ -7,7 +7,6 @@ import classNames from "classnames";
 // material-ui core components
 import {List, ListItem} from "@material-ui/core";
 // @material-ui/icons
-import Favorite from "@material-ui/icons/Favorite";
 
 import {footerStyle} from '../assets/Styles';
 

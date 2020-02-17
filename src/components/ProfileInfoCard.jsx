@@ -23,19 +23,19 @@ class ProfileInfoCard extends Component {
                         </Grid>
                         <Grid container xs={12} sm={12} justify={"center"} alignItems={"center"} direction={"column"}>
                             <Typography variant={"h4"} style={{fontWeight:"300"}}>
-                                Missaka Iddamalgoda
+                                {this.props.name}
                             </Typography>
                             <Typography variant={"body1"} style={{fontWeight:"300"}}>
-                                Age: 22
+                                Age: {this.props.age}
                             </Typography>
                             <Typography variant={"body1"} style={{fontWeight:"300"}}>
-                                Location: Ratnapura
+                                City: {this.props.city}
                             </Typography>
+                            {/*<Typography variant={"body1"} style={{fontWeight:"300"}}>*/}
+                            {/*    Current State: trigger-happy*/}
+                            {/*</Typography>*/}
                             <Typography variant={"body1"} style={{fontWeight:"300"}}>
-                                Current State: trigger-happy
-                            </Typography>
-                            <Typography variant={"body1"} style={{fontWeight:"300"}}>
-                                Number of sessions: 2
+                                Number of sessions: {this.props.sessionCount}
                             </Typography>
 
                         </Grid>

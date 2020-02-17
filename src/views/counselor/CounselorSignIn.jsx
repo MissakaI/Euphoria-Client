@@ -11,13 +11,19 @@ class CounselorSignIn extends Component {
     constructor(props) {
         super(props);
         this.setState({
-            isSignUp:props.isSignUp
+            isSignUp: props.isSignUp
         })
     };
 
     state = {
         username: null,
         password: null,
+        confirmPassword: null,
+        email: null,
+        speciality: null,
+        hospital: null,
+        city: null,
+
         signIn: null,
         isSignUp: false
     };
@@ -31,9 +37,36 @@ class CounselorSignIn extends Component {
         this.props.signIn(signInCredentials);
     };
 
+    signUp = () => {
+
+        // if(this.state.password === this.state.confirmPassword){
+            const loginCredentials = {
+                username: this.state.username,
+                email: this.state.email,
+                password: this.state.password
+            };
+
+            const signUpCredentials = {
+                username: this.state.username,
+                description: null,
+                specialty: this.state.speciality,
+                hospital: this.state.hospital,
+                city: this.state.city,
+                photoUrl : null,
+                loginCredentials: loginCredentials
+            };
+
+            this.props.signUp(signUpCredentials);
+        // }else{
+        //     alert('Passwords are not matched!')
+        // }
+
+
+    };
+
     changeMode = () => {
         this.setState({
-            isSignUp:!this.state.isSignUp
+            isSignUp: !this.state.isSignUp
         });
     }
 
@@ -52,7 +85,7 @@ class CounselorSignIn extends Component {
 
     render() {
         let card
-        if (!this.state.isSignUp){
+        if (!this.state.isSignUp) {
             card =
                 <>
                     {/* Begin:Sign-In Card */}
@@ -107,7 +140,8 @@ class CounselorSignIn extends Component {
                                     </Grid>
 
                                     <Grid item xs={12} className={'horizontalCenter'}>
-                                        <Button className={'btn-small'} onClick={() => this.changeMode()}>Not a member? Join as a counselor
+                                        <Button className={'btn-small'} onClick={() => this.changeMode()}>Not a member?
+                                            Join as a counselor
                                             today.</Button>
 
                                     </Grid>
@@ -117,7 +151,7 @@ class CounselorSignIn extends Component {
                     </Grid>
                     {/* End:Sign-In Card */}
                 </>
-        }else{
+        } else {
             card =
                 <>
                     {/* Begin:Sign-Up Card */}
@@ -143,6 +177,18 @@ class CounselorSignIn extends Component {
                                                    variant={'outlined'}
                                                    label={'Name'}
                                                    fullWidth
+                                                   type={'text'}
+                                        />
+                                    </Grid>
+
+                                    <Grid item xs={12}>
+                                        <TextField id={'email'}
+                                                   onChange={e => this.handleChange(e)}
+                                                   className={'txtFld-small'}
+                                                   variant={'outlined'}
+                                                   label={'Email'}
+                                                   fullWidth
+                                                   type={'email'}
                                         />
                                     </Grid>
 
@@ -188,11 +234,56 @@ class CounselorSignIn extends Component {
                                                 // component="span"
                                                 fullWidth={true}
                                                 size={"large"}
-                                                startIcon={<CloudUploadIcon />}
+                                                startIcon={<CloudUploadIcon/>}
                                             >
                                                 Profile Photo
                                             </Button>
                                         </label>
+                                    </Grid>
+
+                                    {/*<Grid item xs={6}>*/}
+                                    {/*    <TextField*/}
+                                    {/*        id={'password'}*/}
+                                    {/*        onChange={e => this.handleChange(e)}*/}
+                                    {/*        // className={'txtFld-small'}*/}
+                                    {/*        variant={'outlined'}*/}
+                                    {/*        label={'Password'}*/}
+                                    {/*        fullWidth*/}
+                                    {/*        type={'password'}*/}
+                                    {/*    />*/}
+                                    {/*</Grid>*/}
+
+                                    {/*<Grid item xs={6}>*/}
+                                    {/*    <TextField*/}
+                                    {/*        id={'confirm_password'}*/}
+                                    {/*        onChange={e => this.handleChange(e)}*/}
+                                    {/*        // className={'txtFld-small'}*/}
+                                    {/*        variant={'outlined'}*/}
+                                    {/*        label={'Confirm Password'}*/}
+                                    {/*        fullWidth*/}
+                                    {/*        type={'password'}*/}
+                                    {/*    />*/}
+                                    {/*</Grid>*/}
+
+                                    <Grid item xs={6}>
+                                        <TextField id={'username'}
+                                                   onChange={e => this.handleChange(e)}
+                                                   className={'txtFld-small'}
+                                                   variant={'outlined'}
+                                                   label={'Username'}
+                                                   fullWidth
+                                        />
+                                    </Grid>
+
+                                    <Grid item xs={6}>
+                                        <TextField
+                                            id={'password'}
+                                            onChange={e => this.handleChange(e)}
+                                            className={'txtFld-small'}
+                                            variant={'outlined'}
+                                            type={'password'}
+                                            label={'Password'}
+                                            fullWidth/>
                                     </Grid>
 
                                     <Grid item xs={12} sm={10} id={'buttonGrid'}
@@ -207,11 +298,12 @@ class CounselorSignIn extends Component {
                                             color={"primary"}
                                             id={'signUpBtn'}
                                             type={"submit"}
-                                            onClick={() => this.signIn()}
+                                            onClick={() => this.signUp()}
                                         >
                                             Sign Up
                                         </Button>
                                     </Grid>
+
 
                                     <Grid item xs={12} className={'horizontalCenter'}>
                                         {/*<Button className={'btn-small'}>Not a member? Join as a counselor*/}
@@ -244,6 +336,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         signIn: (state) => dispatch(actions.signIn(state)),
+        signUp: (state) => dispatch(actions.signUp(state)),
     };
 };
 
