@@ -28,7 +28,8 @@ export default class GenderStat extends Component {
                 count.push(d.count);
                 return null;
             });
-            // console.log(gender);
+            console.log(gender);
+            console.log(count);
             this.setState({
                 isLoaded:true,
                 chartData:{

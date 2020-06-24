@@ -82,16 +82,20 @@ class SignIn extends Component{
     axios.post('http://localhost:8080/api/user/signin',JSON.stringify(this.state),{headers: {
         'Content-Type': 'application/json',
     }})
-    .then((response)=>{
-      if(response.data){
+    .then((res)=>{
+        const dat=res.data;
+        console.log(dat)
         UserProfile.setEmail(this.state.email);
-        UserProfile.setName(this.state.name);
-        this.props.history.push('/user/counselors');
-      }else{
-        alert("Invalid combination of username and password");
-        this.setState({"email":'',"password":''});
-      }
-    }) 
+        UserProfile.setName(dat.firstname);
+        UserProfile.setPic(dat.pic_name);
+        UserProfile.setUserType(dat.account_type);
+        UserProfile.setActivated(dat.activated);
+        window.location.replace('/user/homepage')
+    }).catch(err=>{
+      alert("Invalid combination of username and password");
+      this.setState({"email":'',"password":''});
+
+    })
     
 
   }
@@ -154,7 +158,7 @@ class SignIn extends Component{
                       </Link>
                     </Grid>
                     <Grid item>
-                      <Link href="#" variant="body2">
+                      <Link href="/user/signup" variant="body2">
                         {"Don't have an account? Sign Up"}
                       </Link>
                     </Grid>

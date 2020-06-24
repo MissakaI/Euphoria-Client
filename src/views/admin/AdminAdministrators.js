@@ -39,8 +39,11 @@ class AdminAdministrators extends Component{
 
     render(){
         return(
+            
+            <React.Fragment>
+
+            <AdminNavbar/>
             <div className="container">
-                <AdminNavbar/>
                 <div className="m-4">
                     <Row>
                         <Col md={12}>
@@ -86,6 +89,7 @@ class AdminAdministrators extends Component{
                     <Button variant="success" onClick={()=>this.props.history.push("/admin/addAdminForm")}>ADD NEW ADMINISTRATOR</Button>
                 </div>
             </div>
+            </React.Fragment>
         );
     }
 }

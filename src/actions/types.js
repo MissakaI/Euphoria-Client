@@ -1,6 +1,9 @@
 export const SIGN_IN='SIGN_IN';
+export const SIGN_UP='SIGN_UP';
 
 //counselor
 export const COUNSELOR_SIGN_IN = "COUNSELOR_SIGN_IN";
 export const COUNSELOR_SIGN_UP = 'COUNSELOR_SIGN_UP';
 export const GET_PATIENT_RECORDS = 'GET_PATIENT_RECORDS';
+export const GET_APPOINTMENTS = 'GET_APPOINTMENTS';
+export const APPROVE_APPOINTMENTS = 'APPROVE_APPOINTMENTS';

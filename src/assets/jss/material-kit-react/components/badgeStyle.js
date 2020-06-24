@@ -1,10 +1,10 @@
 import {
-    dangerColor,
-    infoColor,
-    primaryColor,
-    roseColor,
-    successColor,
-    warningColor
+  primaryColor,
+  warningColor,
+  dangerColor,
+  successColor,
+  infoColor,
+  roseColor
 } from "assets/jss/material-kit-react.js";
 
 const badgeStyle = {

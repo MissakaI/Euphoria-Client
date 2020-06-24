@@ -49,8 +49,8 @@ class FormalRegistration extends Component {
         
         if(this.isValid()){
             console.log("ho");
-            this.setState({errors:{},accountType:'quick'});
-
+            this.setState({errors:{}});
+            console.log(this.state);
             axios.post('http://localhost:8080/api/user/formalsignup',JSON.stringify(this.state),{headers: {
             'Content-Type': 'application/json',
             }}).then( result => {
@@ -109,7 +109,7 @@ class FormalRegistration extends Component {
 
 
                         <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-                            <Form.Label>Gender</Form.Label>
+                                     <Form.Label>Gender</Form.Label>
                                     <Form.Control as="select" name="gender" onChange={this.onChange}>
                                         <option>Male</option>
                                         <option>Female</option>
@@ -188,7 +188,8 @@ class FormalRegistration extends Component {
                                     <Form.Control 
                                         label="Contact Number"
                                         className={useStyles.textField}
-                                        type="text"
+                                        type="number"
+                                     
                                         name="contactNumber"
                                         autoComplete="contactNumber"
                                         margin="none"
@@ -255,7 +256,7 @@ class FormalRegistration extends Component {
                                         autoComplete="city"
                                         margin="none"
                                         variant="outlined"
-                                        style={{ width: '50vh' }}
+                                        style={{ width: '40vh' }}
                                         onChange={this.onChange}
                                         value={this.state.city}
                                     />
@@ -265,19 +266,35 @@ class FormalRegistration extends Component {
 
                             <Form.Group as={Col} md="3" controlId="validationCustom04">
                                 
-                            <Form.Label>District</Form.Label>
-                                    <Form.Control 
-                                        label="District"
-                                        className={useStyles.textField}
-                                        type="text"
-                                        name="district"
-                                        autoComplete="district"
-                                        margin="none"
-                                        variant="outlined"
-                                        style={{ width: '50vh' }}
-                                        onChange={this.onChange}
-                                        value={this.state.district}
-                                    />
+                                    <Form.Label style={{marginLeft:'100px'}}>District</Form.Label>
+                                   
+                                    <Form.Control style={{marginLeft:'100px'}} as="select" name="district" onChange={this.onChange}>
+                                        <option> Ampara	</option>
+                                        <option>Anuradhapura</option>	
+                                        <option> Badulla	</option>
+                                        <option> Batticaloa	</option>
+                                        <option> Colombo</option>	
+                                        <option> Galle	</option>
+                                        <option> Gampaha</option>	
+                                        <option>Hambantota</option>	
+                                        <option> Jaffna	</option>
+                                        <option> Kalutara</option>	
+                                        <option> Kandy	</option>
+                                        <option> Kegalle	</option>
+                                        <option> Kilinochchi</option>	
+                                        <option> Kurunegala	</option>
+                                        <option> Mannar	</option>
+                                        <option> Matale	</option>
+                                        <option> Matara	</option>
+                                        <option> Moneragala	</option>
+                                        <option> Mullaitivu	</option>
+                                        <option> Nuwara Eliya</option>	
+                                        <option>  Polonnaruwa	</option>
+                                        <option> Puttalam	</option>
+                                        <option> Ratnapura	</option>
+                                        <option> Trincomalee</option>	
+                                        <option> Vavuniya</option>
+                                        </Form.Control>
                                     {errors.district && <span style={{color:'red'}} className="help-block">{errors.district}</span>}
                             </Form.Group>
 

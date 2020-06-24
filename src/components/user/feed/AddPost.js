@@ -2,7 +2,7 @@ import React, { Component,useState} from 'react'
 import {Modal,Button,ButtonToolbar,Form,Card,Image} from 'react-bootstrap'
 import { Plus } from 'react-bootstrap-icons';
 import {CreatePostStyles as styles} from '../../../assets/Styles'
-
+import Avatar from '@material-ui/core/Avatar';
 import {FormGroup,Checkbox,TextField,Tooltip} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -34,17 +34,24 @@ function MyVerticallyCenteredModal(props) {
         other: false
       });
     const [emotion_tags,setEmotions]=React.useState([]);
+    const [bstate,setButton]=React.useState(true);
     
     
     
     const handleTitle=e=>{
        
        setPostTitle(e.target.value);
+       if(post_description!='' && post_description!=' '){
+            setButton(false);
+       }
     }
     
     const handleDescription=e=>{
        
        setPostDescription(e.target.value);
+       if(post_title!=''  && post_title!=' '){
+        setButton(false);
+   }
     }
     const handleCheck = name => event => {
         setState({ ...state, [name]: event.target.checked });
@@ -61,10 +68,9 @@ function MyVerticallyCenteredModal(props) {
 
     };
     const handleSend=()=>{
-        const user_id=UserProfile.getId();
-        console.log(user_id)
+        if(post_title!=''&& post_description!=''){const user_id=UserProfile.getId();
         const post={post_title,post_description,emotion_tags,user_id}
-        createpost(post);
+        createpost(post);}
     }
     return (
       <Modal
@@ -78,7 +84,7 @@ function MyVerticallyCenteredModal(props) {
 
 
           <Modal.Title id="contained-modal-title-vcenter">
-                    <Image variant="top" src={require('../../../assets/profile/girl.jpeg')} 
+                    <Image variant="top" src={require('../../../assets/profile/me.jpeg')} 
                             style={{
                                 margin:'20px',
                                 width: '90px',
@@ -189,7 +195,7 @@ function MyVerticallyCenteredModal(props) {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="info"  onClick={handleSend} style={{margin:'20px'}}>Send</Button>
+          <Button variant="info"  disabled={bstate} onClick={handleSend} style={{margin:'20px'}}>Send</Button>
           <Button variant="danger" onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>

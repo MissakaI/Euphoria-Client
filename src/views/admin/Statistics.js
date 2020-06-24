@@ -6,6 +6,7 @@ import GenderStat from './Stats/GenderStat';
 import YearStat from './Stats/YearStat';
 import EmotionStat from './Stats/EmotionStat';
 import NavBarLandingPage from '../../components/NavBarLandingPage';
+import AdminNavbar from "../../components/admin/AdminNavbar";
 
 import EqualizerIcon from '@material-ui/icons/Equalizer';
 export default class Statistics extends Component {
@@ -20,7 +21,8 @@ export default class Statistics extends Component {
 
     return (
        <React.Fragment>
-        <NavBarLandingPage></NavBarLandingPage>
+        <AdminNavbar/>
+
         <Grid container spacing={3}>
             <Grid 
                 container

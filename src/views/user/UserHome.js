@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PostComponentUser from '../../components/user/PostComponentUser'
 import AddPost from '../../components/user/feed/AddPost'
-import {Row,Col} from 'react-bootstrap'
+import {Row,Col,Alert,Button} from 'react-bootstrap'
 import PostComponent from '../../components/user/feed/PostComponent'
 import axios from 'axios';
 import {Grid,TextField} from '@material-ui/core';
@@ -16,13 +16,15 @@ import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
 import Notifications from '../../components/user/Notifications'
 import UserProfile from '../../assets/UserProfile';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 class UserHome extends Component {
     constructor(props){
         super(props);
         this.state={
             posts:[],
-            isLoaded:false
+            isLoaded:false,
+            show:true
           
            
         }
@@ -65,9 +67,24 @@ class UserHome extends Component {
         console.log(this.state.isLoaded)
         return (
             <React.Fragment>
+            {UserProfile.getUserType()=="quick" && <Alert show={this.state.show} style={{position:'fixed',top:'0',left:'0',width:'100%',height:'20%'}} variant="secondary">
+                                <div style={{marginTop:'110px'}}>
 
-                <Grid container spacing={3}  direction="row" justify="center" alignItems="center">
+                                <Alert.Heading style={{marginLeft:'400px'}}>Register Formally In order to get full benifits such as creating posts and commenting on posts</Alert.Heading>
+                                </div>
+                                <div className="d-flex justify-content-end" style={{marginTop:'-30px'}} >
+                                    <Button onClick={() =>this.setState({show:false}) } variant="outline-dark">
+                                       <HighlightOffIcon></HighlightOffIcon> Dismiss
+                                    </Button>
+                                </div>
+                                
+            </Alert>
+}
+                <Grid container spacing={3}  direction="row" justify="center" alignItems="left">
 
+                    <Grid item>
+                        <h3>Home</h3>
+                    </Grid>
                     <Grid item>
                         <TextField id="outlined-search" name="search" onChange={this.handleChange} label="Search field" type="search" variant="outlined" />
                     </Grid>

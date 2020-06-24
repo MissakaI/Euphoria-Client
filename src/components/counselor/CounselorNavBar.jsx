@@ -3,8 +3,15 @@ import React, {Component} from 'react'
 import {Button} from '@material-ui/core'
 import {Form, Image, Nav, Navbar} from "react-bootstrap";
 import Logo from '../../assets/eu-logo.png';
+import {url} from "../../assets/URL";
+const axios = require('axios').default;
 
 class CounselorNavBar extends Component {
+
+    logOut = () => {
+        localStorage.setItem("JWT", null);
+        axios.defaults.headers.common['Authorization'] = null;
+    };
 
     render() {
         return (
@@ -26,12 +33,12 @@ class CounselorNavBar extends Component {
 
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className={"mr-auto"}>
-                            <Nav.Link>Home</Nav.Link>
-                            <Nav.Link>Questions</Nav.Link>
-                            <Nav.Link>Appointments</Nav.Link>
+                            <Nav.Link href={url.concat("/counselor/homepage")}>Home</Nav.Link>
+                            <Nav.Link href={url.concat("/counselor/questions")}>Questions</Nav.Link>
+                            <Nav.Link href={url.concat("/counselor/appointments")}>New Appointments</Nav.Link>
                         </Nav>
                         <Form inline>
-                            <Button variant="outlined">Sign In</Button>
+                            <Button variant="outlined" onClick={this.logOut}>Sign Out</Button>
                         </Form>
                     </Navbar.Collapse>
                     {/*</Container>*/}

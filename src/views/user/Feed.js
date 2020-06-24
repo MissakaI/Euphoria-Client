@@ -17,6 +17,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import NavbarUser from '../../components/user/NavbarUser';
 import { Jumbotron } from '../../components/user/Jumbotron';
 import {Container} from 'react-bootstrap';
+import UserProfile from '../../assets/UserProfile'
 
 class Feed extends Component {
     constructor(props){
@@ -25,9 +26,12 @@ class Feed extends Component {
             posts:[],
             search:'',
             emo_tags : [
-                'Anxious',
-                'Depressed',
-                'Happy',
+                'anxious',
+                'depressed',
+                'suicidal',
+                'sad',
+                'stressed',
+                'other'
             ],
             emotions:[]
         }
@@ -101,11 +105,12 @@ class Feed extends Component {
         
         console.log("*****")
         console.log(content);
-
         
-        const posts=content.map((post)=>(<div key={post.post_id} style={{margin:'20px'}}><PostComponent style={{display:'flex'}} post={post}></PostComponent></div>));
+        
+        const posts=content.map((post)=>(<div key={post.id} style={{margin:'20px'}}><PostComponent style={{display:'flex'}} post={post}></PostComponent></div>));
+        console.log(posts)
         return (
-
+            
             <React.Fragment>
                 <NavbarUser></NavbarUser>
                 <Jumbotron></Jumbotron>
@@ -120,7 +125,7 @@ class Feed extends Component {
                     <Grid item>
                         
                         <FormControl style={{margin:'20px',width:'200px'}}>
-                            <InputLabel id="demo-mutiple-checkbox-label">Tag</InputLabel>
+                            <InputLabel id="demo-mutiple-checkbox-label">Emotion Tags</InputLabel>
                             <Select
                             labelId="demo-mutiple-checkbox-label"
                             id="demo-mutiple-checkbox"
@@ -148,7 +153,7 @@ class Feed extends Component {
                         {posts}
                     </Grid>
                     <Grid item xs={2}>
-                        <AddPost></AddPost>
+                        {(UserProfile.getUserType()=="formal") && <AddPost></AddPost>}
                     </Grid>
                 </Grid>
             </Container>

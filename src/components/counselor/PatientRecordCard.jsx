@@ -9,8 +9,11 @@ class PatientRecordCard extends Component {
     constructor(props) {
         //compatible props: title,timestamp, recordEditorState, prescriptionEditorState
         super(props);
-        // this.state = {
-        // };
+        this.state = {
+            record:props.record,
+            recordEditorState:props.record.description,
+            prescriptionEditorState:props.record.prescription
+        };
     }
 
     onRecordEditorStateChange = (editorState) => {
@@ -38,7 +41,7 @@ class PatientRecordCard extends Component {
         }
 
         let recordEditorState=null;
-        if (this.props.recordEditorState){
+        if (this.state.recordEditorState){
             recordEditorState=this.props.recordEditorState;
         }
 

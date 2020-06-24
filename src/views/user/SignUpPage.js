@@ -25,7 +25,7 @@ class SignUpPage extends Component {
                 container
                 spacing={3}
             >
-                <Grid item xs={12} style={{ marginBottom:'0' }}>
+                <Grid item xs={12} style={{ marginBottom:'0' ,width:'100%'}}>
                     <NavBarLandingPage></NavBarLandingPage>
                 </Grid>
             </Grid>

@@ -11,7 +11,7 @@ class AdminNavbar extends Component{
                 <Nav.Link href="/admin/administrators">Administrators</Nav.Link>
                 <Nav.Link href="/admin/counselors">Counselors</Nav.Link>
                 <Nav.Link href="/admin/users">Users</Nav.Link>
-                <Nav.Link href="/admin/viewPosts">Posts Review</Nav.Link>
+                <Nav.Link href="/user/stats">Statistics</Nav.Link>
                 </Nav>
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">

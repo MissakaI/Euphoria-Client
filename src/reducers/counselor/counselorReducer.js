@@ -2,7 +2,8 @@ import * as actionTypes from '../../actions/types';
 
 const initialState = {
     signedIn: false,
-    patientRecords: []
+    patientRecords: [],
+    appointments:[],
 };
 
 export default function (state = initialState, action) {
@@ -16,9 +17,19 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 patientRecords: action.patientRecords
-            }
+            };
+        case actionTypes.GET_APPOINTMENTS:
+            return {
+                ...state,
+                appointments: action.appointments
+            };
+
+        case actionTypes.GET_APPOINTMENTS:
+            return {
+                ...state,
+                // appointments: action.appointments
+            };
         default:
             return state;
-    }
-    ;
+    };
 };

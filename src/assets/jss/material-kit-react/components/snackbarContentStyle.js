@@ -1,11 +1,11 @@
 import {
-    container,
-    dangerBoxShadow,
-    defaultFont,
-    infoBoxShadow,
-    primaryBoxShadow,
-    successBoxShadow,
-    warningBoxShadow
+  defaultFont,
+  primaryBoxShadow,
+  infoBoxShadow,
+  successBoxShadow,
+  warningBoxShadow,
+  dangerBoxShadow,
+  container
 } from "assets/jss/material-kit-react.js";
 
 const snackbarContentStyle = {

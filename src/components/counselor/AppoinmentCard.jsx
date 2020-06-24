@@ -17,7 +17,7 @@ class AppoinmentCard extends Component {
                 {/*Card-Start*/}
                 <Card>
                     <CardHeader
-                        title={this.props.customer}
+                        title={this.props.user}
                         subheader={this.props.username}
                     />
 

@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {Image, Nav, Navbar} from 'react-bootstrap';
+import React, { Component } from 'react'
+import {Navbar,Form,FormControl,Nav,Button,DropdownButton,Dropdown,Image} from 'react-bootstrap';
 import logo from '../../assets/eu-logo.png';
 import profilePic from '../../assets/profile/me.jpeg';
 import styled from 'styled-components';
@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import {url} from '../../assets/URL';
+import UserProfile from '../../assets/UserProfile';
 
 const Styles=styled.div`
     .bg-custom-1 {
@@ -18,8 +19,8 @@ const Styles=styled.div`
     background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
     }
     .profileImage{
-        max-height: 101px
-        max-width : 110px
+        max-height: 81px
+        max-width : 90px
 
     }
 `;
@@ -58,7 +59,7 @@ export default class NavbarUser extends Component {
         return (
         <Styles>
 
-            <Navbar bg="dark" variant="dark">
+            <Navbar fixed="top" style={{height:'10%'}} bg="dark" variant="dark">
                 <img
                     src={logo}
                     width="80"
@@ -73,7 +74,7 @@ export default class NavbarUser extends Component {
                     <Nav.Link href={url.concat("/user/counselors")}>Counselors</Nav.Link>
                 </Nav>
                 
-                <Nav className="justify-content-end">
+                <Nav >
 
                     
                     <IconButton
@@ -82,7 +83,7 @@ export default class NavbarUser extends Component {
                         aria-haspopup="true"
                         onClick={this.handleMenu}
                         >
-                    <Image src={profilePic} roundedCircle className="profileImage" />
+                    <Image src={require('../../assets/profile/'+UserProfile.getPic())} roundedCircle  className="profileImage" />
                     </IconButton>
                     <Menu
                         id="menu-appbar"

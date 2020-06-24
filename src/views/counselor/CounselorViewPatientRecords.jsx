@@ -3,20 +3,38 @@ import CounselorNavBar from "../../components/counselor/CounselorNavBar";
 import {Grid, Typography} from "@material-ui/core";
 import PatientRecordCard from "../../components/counselor/PatientRecordCard";
 import ProfileInfoCard from "../../components/ProfileInfoCard";
-import * as actions from "../../actions";
-import {connect} from "react-redux";
+import AppointmentRequestCard from "../../components/counselor/AppointmentRequestCard";
+const axios = require('axios').default;
+// import * as actions from "../../actions";
+// import {connect} from "react-redux";
 
 class CounselorViewPatientRecords extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            error: null,
-            isLoaded: false,
-            items: []
+            records:null,
+            // error: null,
+            // isLoaded: false,
+            // items: []
         };
 
-        this.props.getPatientRecords("userID");
+        // this.props.getPatientRecords("userID");
     }
+
+    componentDidMount(){
+        axios.get('http://localhost:8080/api/counselor/patient-records/'+this.state.user.id,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }).then((response) => {
+            this.setState({
+                records:response.data,
+            })
+        }).catch((err) => {
+            return err
+        })
+    };
 
     render() {
         return (
@@ -41,7 +59,18 @@ class CounselorViewPatientRecords extends Component {
                             <ProfileInfoCard ></ProfileInfoCard>
                         </Grid>
                         <Grid item xs={12} sm={9}>
-                            <PatientRecordCard></PatientRecordCard>
+                            {this.state.records !== null ?
+                                this.state.records.map((record, key) => (
+                                    <>
+
+                                        {/*Card-Start*/}
+                                        <PatientRecordCard record={record}/>
+                                        {/*<AppointmentRequestCard keyValue={key} appointment={appointment}/>*/}
+                                        {/*Card-End*/}
+
+                                    </>
+                                )) : <h3 style={{textAlign: 'center'}}> Loading...</h3>
+                            }
                         </Grid>
                     </Grid>
                 </Grid>
@@ -52,20 +81,22 @@ class CounselorViewPatientRecords extends Component {
 
 }
 
-const mapStateToProps = state => {
-    return {
-        patientRecords: state.counselorReducer.patientRecords,
-    };
-};
+// const mapStateToProps = state => {
+//     return {
+//         patientRecords: state.counselorReducer.patientRecords,
+//     };
+// };
+//
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         getPatientRecords: (user) => dispatch(actions.getPatientRecords(user))
+//     };
+// };
+//
+// export default connect(
+//     mapStateToProps,
+//     mapDispatchToProps
+// )(CounselorViewPatientRecords);
 
-const mapDispatchToProps = dispatch => {
-    return {
-        getPatientRecords: (user) => dispatch(actions.getPatientRecords(user))
-    };
-};
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(CounselorViewPatientRecords);
+export default CounselorViewPatientRecords;
 

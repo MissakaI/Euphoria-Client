@@ -13,7 +13,8 @@ class AddAdminForm extends Component{
             email:'',
             adminUsername:'',
             adminPassword:'',
-            activeStatus:''
+            errors:{}
+
         }
         this.handleChange = this.handleChange.bind(this);
         this.addAdmin = this.addAdmin.bind(this);
@@ -26,24 +27,25 @@ class AddAdminForm extends Component{
     }
 
     addAdmin(){
-        //***************************************************CHECK VALIDATION LATER****************************************** */
         if(Validator.isEmpty(this.state.firstName)){
-            alert("First Name is required");
+            this.state.errors.firstName="This field is required"
+            
         }
         if(Validator.isEmpty(this.state.lastName)){
-            alert("Last Name is a required");
+            this.state.errors.lastName="This field is required"
+            
         }
-        if(Validator.isEmpty(this.state.email) || Validator.isEmail(this.state.email)){
-            alert("Invalid Email");
+        if(Validator.isEmpty(this.state.email)){
+            this.state.errors.email="This field is required"
+            
         }
         if(Validator.isEmpty(this.state.adminUsername)){
-            alert("Username Name is a required");
+            this.state.errors.adminUsername="This field is required"
+            
         }
         if(Validator.isEmpty(this.state.adminPassword)){
-            alert("Password Name is a required");
-        }
-        if(Validator.isEmpty(this.state.activeStatus)){
-            alert("Please mark Active Status");
+            this.state.errors.firstName="This field is required"
+            
         }
         
         axios.post("http://localhost:8080/api/admin/addAdmin",JSON.stringify(this.state),{
@@ -72,6 +74,7 @@ class AddAdminForm extends Component{
                         <Form.Group controlId="formBasicFirstName">
                             <Form.Label>First Name</Form.Label>
                             <Form.Control type="name" name="firstName" value={this.state.firstName} placeholder="FirstName" onChange={this.handleChange}/>
+                            {this.state.errors.firstName && <span style={{color:'red'}} className="help-block">{this.state.errors.firstName}</span>}
                         </Form.Group>
 
                         <Form.Group controlId="formBasicLastName">
@@ -92,12 +95,6 @@ class AddAdminForm extends Component{
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" name="adminPassword" value={this.state.adminPassword} placeholder="Password" onChange={this.handleChange}/>
-                        </Form.Group>
-                            
-                        <Form.Group controlId="formBasicRadio">
-                            <Form.Label>Active Status</Form.Label>
-                            <Form.Check type="radio" label="Active" name="activeStatus" value="Active" onChange={this.handleChange} />
-                            <Form.Check type="radio" label="Inactive" name="activeStatus" value="Inactive" onChange={this.handleChange} />
                         </Form.Group>
 
                         <Button variant="primary" type="submit" onClick={()=>this.addAdmin()}>

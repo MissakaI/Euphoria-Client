@@ -6,6 +6,16 @@ import logo from "../../assets/eu-logo.png";
 import {connect} from 'react-redux';
 import * as actions from "../../actions/index";
 
+const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+const validateForm = (errors) => {
+    let valid = true;
+    Object.values(errors).forEach(
+        (val) => val.length > 0 && (valid = false)
+    );
+    return valid;
+};
+
+
 class CounselorSignIn extends Component {
 
     constructor(props) {
@@ -16,6 +26,9 @@ class CounselorSignIn extends Component {
     };
 
     state = {
+        loginUsername:null,
+        loginPassword:null,
+        name: null,
         username: null,
         password: null,
         confirmPassword: null,
@@ -23,16 +36,27 @@ class CounselorSignIn extends Component {
         speciality: null,
         hospital: null,
         city: null,
-
+        picName: null,
         signIn: null,
-        isSignUp: false
+        isSignUp: false,
+        description:null,
+        slmcNumber:null,
+        errors: {
+            name: '',
+            email: '',
+            password: '',
+            loginPassword:'',
+            confirmPassword:'',
+            slmcNumber:'',
+            loginUsername:'',
+        }
     };
 
     signIn = () => {
-        console.log(this.state.username, this.state.password);
+        console.log(this.state.name, this.state.password);
         const signInCredentials = {
-            username: this.state.username,
-            password: this.state.password
+            username: this.state.loginUsername,
+            password: this.state.loginPassword
         }
         this.props.signIn(signInCredentials);
     };
@@ -47,16 +71,20 @@ class CounselorSignIn extends Component {
             };
 
             const signUpCredentials = {
+                name:this.state.name,
                 username: this.state.username,
-                description: null,
+                description: this.state.description,
                 specialty: this.state.speciality,
                 hospital: this.state.hospital,
                 city: this.state.city,
-                photoUrl : null,
-                loginCredentials: loginCredentials
+                picName : this.state.picName.split('\\')[2],
+                loginCredentials: loginCredentials,
+                slmcNumber:this.state.slmcNumber
             };
 
             this.props.signUp(signUpCredentials);
+
+            window.location.reload();
         // }else{
         //     alert('Passwords are not matched!')
         // }
@@ -71,9 +99,53 @@ class CounselorSignIn extends Component {
     }
 
     handleChange = e => {
+        e.preventDefault();
         this.setState({
             [e.target.id]: e.target.value
         });
+        // console.log(e.target.value.split('\\')[2]);
+
+
+        const name = e.target.id;
+        const value = e.target.value;
+
+        let errors = this.state.errors;
+
+        switch (name) {
+            case 'name':
+                errors.name =
+                    value.length < 0
+                        ? 'User Name must not be null'
+                        : '';
+                break;
+            case 'email':
+                errors.email =
+                    validEmailRegex.test(value)
+                        ? ''
+                        : 'Email is not valid!';
+                break;
+            case 'password':
+                errors.password =
+                    value.length < 8
+                        ? 'Password must be 8 characters long!'
+                        : '';
+                break;
+            case 'loginPassword':
+                errors.password =
+                    value.length < 8
+                        ? 'Password is empty!'
+                        : '';
+                break;
+            case 'confirmPassword':
+                errors.confirmPassword=
+                    this.state.confirmPassword !== this.state.password
+                        ? 'Passwords are not matched!'
+                        : '';
+                break;
+            default:
+                break;
+        }
+        this.setState({errors, [name]: value});
     };
 
     componentDidUpdate() {
@@ -84,6 +156,14 @@ class CounselorSignIn extends Component {
 
 
     render() {
+        const {errors} = this.state;
+
+        const error = {
+            color: '#db2269',
+            fontSize: '0.825em',
+            display: 'relative'
+        };
+
         let card
         if (!this.state.isSignUp) {
             card =
@@ -100,29 +180,33 @@ class CounselorSignIn extends Component {
                                     <Grid item xs={12} className={'brandText'}>
                                         <Typography>Euphoria</Typography>
                                     </Grid>
-
                                 </Grid>
                                 <hr/>
                                 <Grid container id={'fieldGrid'} spacing={2}>
                                     <Grid item xs={8}>
-                                        <TextField id={'username'}
+                                        <TextField id={'loginUsername'}
                                                    onChange={e => this.handleChange(e)}
                                                    className={'txtFld-small'}
                                                    variant={'outlined'}
                                                    label={'Username'}
                                                    fullWidth
+                                                   noValidate
                                         />
+                                        {errors.loginUsername.length === 0 &&
+                                        <span style={error}>{errors.loginUsername}</span>}
                                     </Grid>
 
                                     <Grid item xs={8}>
                                         <TextField
-                                            id={'password'}
+                                            id={'loginPassword'}
                                             onChange={e => this.handleChange(e)}
                                             className={'txtFld-small'}
                                             variant={'outlined'}
                                             type={'password'}
                                             label={'Password'}
                                             fullWidth/>
+                                        {errors.loginPassword.length > 0 &&
+                                        <span style={error}>{errors.loginPassword}</span>}
                                     </Grid>
 
                                     <Grid item xs={12} sm={10} id={'buttonGrid'}
@@ -178,7 +262,10 @@ class CounselorSignIn extends Component {
                                                    label={'Name'}
                                                    fullWidth
                                                    type={'text'}
+                                                   noValidate
                                         />
+                                        {errors.name.length > 0 &&
+                                        <span style={error}>{errors.name}</span>}
                                     </Grid>
 
                                     <Grid item xs={12}>
@@ -190,6 +277,21 @@ class CounselorSignIn extends Component {
                                                    fullWidth
                                                    type={'email'}
                                         />
+                                        {errors.email.length > 0 &&
+                                        <span style={error}>{errors.email}</span>}
+                                    </Grid>
+
+                                    <Grid item xs={12}>
+                                        <TextField id={'slmcNumber'}
+                                                   onChange={e => this.handleChange(e)}
+                                                   className={'txtFld-small'}
+                                                   variant={'outlined'}
+                                                   label={'SLMC Number'}
+                                                   fullWidth
+                                                   type={'text'}
+                                        />
+                                        {errors.slmcNumber.length > 0 &&
+                                        <span style={error}>{errors.slmcNumber}</span>}
                                     </Grid>
 
                                     <Grid item xs={6}>
@@ -225,13 +327,14 @@ class CounselorSignIn extends Component {
                                     <Grid item xs={6}>
                                         <input
                                             accept="image/*"
-                                            id="btn-photo"
+                                            id="picName"
                                             type="file"
+                                            onChange={e => this.handleChange(e)}
                                         />
-                                        <label htmlFor="btn-photo">
+                                        <label htmlFor="picName">
                                             <Button
                                                 variant="outlined"
-                                                // component="span"
+                                                component="span"
                                                 fullWidth={true}
                                                 size={"large"}
                                                 startIcon={<CloudUploadIcon/>}
@@ -239,6 +342,18 @@ class CounselorSignIn extends Component {
                                                 Profile Photo
                                             </Button>
                                         </label>
+                                    </Grid>
+
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            id={'description'}
+                                            onChange={e => this.handleChange(e)}
+                                            className={'txtFld-small'}
+                                            variant={'outlined'}
+                                            label={'Description'}
+                                            multiline
+                                            rowsMax={'3'}
+                                            fullWidth/>
                                     </Grid>
 
                                     {/*<Grid item xs={6}>*/}

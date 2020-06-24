@@ -1,17 +1,17 @@
 import {
-    dangerBoxShadow,
-    dangerColor,
-    defaultFont,
-    infoBoxShadow,
-    infoColor,
-    primaryBoxShadow,
-    primaryColor,
-    roseBoxShadow,
-    roseColor,
-    successBoxShadow,
-    successColor,
-    warningBoxShadow,
-    warningColor
+  defaultFont,
+  primaryColor,
+  primaryBoxShadow,
+  infoColor,
+  infoBoxShadow,
+  successColor,
+  successBoxShadow,
+  warningColor,
+  warningBoxShadow,
+  dangerColor,
+  dangerBoxShadow,
+  roseColor,
+  roseBoxShadow
 } from "assets/jss/material-kit-react.js";
 
 const customDropdownStyle = theme => ({

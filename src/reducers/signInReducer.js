@@ -1,4 +1,4 @@
-import {SIGN_IN} from '../actions/types';
+import {SIGN_IN,SIGN_UP} from '../actions/types';
 
 const initialState = {
     signedIn:false
@@ -10,6 +10,11 @@ export default function (state=initialState,action){
             return {
                 ...state,
                 signedIn : true
+            };
+        case SIGN_UP :
+            return {
+                ...state,
+                signedUp : true
             };
         default: 
             return state;

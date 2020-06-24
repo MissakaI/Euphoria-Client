@@ -24,19 +24,22 @@ class AdminProfile extends Component{
     componentDidMount(){
         const id=UserProfile.getId();
         
-        axios.get("http://localhost:8080/api/admin/viewAdmin"+"/"+id
+        axios.get("http://localhost:8080/api/admin/viewAdmin",{
+            params:{
+                "adminID":id
+            }
+        }
         ).then(res=>{
             const admin=res.data;
-            
-            this.setState={
+            console.log(res);
+            this.setState({
                 adminID:admin.adminID,
                 firstName:admin.firstName,
                 lastName:admin.lastName,
                 email:admin.email,
                 adminUsername:admin.adminUsername,
                 adminPassword:admin.adminPassword,
-                activeStatus:admin.activeStatus
-            }
+                activeStatus:admin.activeStatus})
             
         })
         
